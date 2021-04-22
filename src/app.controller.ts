@@ -48,4 +48,9 @@ export class AppController {
     // req.coo
     return {msg:"success"};
   }
+
+  async logout(@Res({passthrough:true}) res:Response){
+    res.clearCookie('auth-cookie');
+    return {msg:"success"};
+  }
 }
