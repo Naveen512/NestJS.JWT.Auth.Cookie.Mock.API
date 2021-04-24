@@ -15,16 +15,20 @@ export class AppController {
       accessToken: jwtToken,
       refreshToken: "wCH7PEZy1AbvsASAPyM9qo7Bus3qqy"
     }
-    res.setHeader("Access-Control-Allow-Headers", "*");
     res.cookie('auth-cookie', secretData,{
       httpOnly: true,
-      sameSite:"strict",
       expires: new Date(new Date().getTime()+86409000),
     });
    
     // req.
     // req.coo
     return {msg:"success"};
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('user-profile')
+  userProfile(@Req() req){
+    return req.user;
   }
 
   @UseGuards(AuthGuard('jwt'))
