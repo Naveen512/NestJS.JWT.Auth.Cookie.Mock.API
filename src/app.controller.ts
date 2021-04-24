@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Header, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth/auth.service';
 import {Response} from 'express'
@@ -15,9 +15,11 @@ export class AppController {
       accessToken: jwtToken,
       refreshToken: "wCH7PEZy1AbvsASAPyM9qo7Bus3qqy"
     }
-   
+    res.setHeader("Access-Control-Allow-Headers", "*");
     res.cookie('auth-cookie', secretData,{
-      httpOnly: true
+      httpOnly: true,
+      sameSite:"strict",
+      expires: new Date(new Date().getTime()+86409000),
     });
    
     // req.
@@ -28,6 +30,10 @@ export class AppController {
   @UseGuards(AuthGuard('jwt'))
   @Get('liked-movies')
   likedMovies(){
+    // res.cookie('temp', "hello",{
+    //   httpOnly: true,
+    //   expires: new Date(new Date().getTime()+86409000),
+    // });
     return ["Avengers EndGame", "The Lion King", "Harry Potter", "Sherlock Holmes"];
   }
 
@@ -41,7 +47,9 @@ export class AppController {
     }
    
     res.cookie('auth-cookie', secretData,{
-      httpOnly: true
+      httpOnly: true,
+      expires: new Date(),
+      sameSite: "none"
     });
    
     // req.
