@@ -12,7 +12,7 @@ import { RefreshTokenStrategy } from './refreshtoken.strategy';
     JwtModule.register({
       secret: 'My Secret Key Never Let Out Siders',
       signOptions: {
-        expiresIn: '10s',
+        expiresIn: '600s',
       },
     }),
     UserModule,
