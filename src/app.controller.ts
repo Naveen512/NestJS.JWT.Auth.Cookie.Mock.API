@@ -61,6 +61,7 @@ export class AppController {
     return {msg:"success"};
   }
 
+  @Get('logout')
   async logout(@Res({passthrough:true}) res:Response){
     res.clearCookie('auth-cookie');
     return {msg:"success"};
