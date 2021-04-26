@@ -52,8 +52,7 @@ export class AppController {
    
     res.cookie('auth-cookie', secretData,{
       httpOnly: true,
-      expires: new Date(),
-      sameSite: "none"
+      expires: new Date(new Date().getTime()+86409000),
     });
    
     // req.
