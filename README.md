@@ -1,6 +1,6 @@
 ## NestJS JWT Cookie Auth Mock API
 
-<h4> Install NestJS CLI into the local machine</h4>
+## Install NestJS CLI into the local machine
 
 ```bash
 $ npm i -g @nestjs/cli
@@ -22,29 +22,65 @@ $ npm run start:dev
 By default NestJS runs under 3000 port number.
 To change it go to 'src/main.ts' <b>await app.listen(4000)<b>
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+## Register Your Client Application Port Number
+Go to 'main.ts'
+```
+ app.enableCors({
+    credentials:true,
+    origin:"http://localhost:8080",
+  });
 ```
 
-## Support
+## Change User Credentials
+To change user 'email' and 'password' go to <b>src/users/user.service.ts<b>
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Change JWT Token Expiraion
+To change the jwt token expiration go to 'src/auth/auth.module.ts'.
+```
+#600s --> 600 seconds
+signOptions: {
+        expiresIn: '600s',
+      }
+```
 
+## Login Endpoint
+```
+#POST endpoint
+http://localhost:3000/auth/login
+
+#default credentials payload
+{
+  'email': 'naveen@techseeker.com',
+  'password':'12345
+}
+```
+
+## User Profile API (Secured Endpoint)
+```
+#GET endpoint
+http://localhost:3000/user-profile
+```
+
+## Movies Endpoint (A Sample Secure Endpoint)
+```
+#GET endpoint
+http://localhost:3000/liked-movies
+```
+
+## Refresh Token Endpoint
+```
+#GET endpoint
+http://localhost:3000/refresh-token
+```
+
+## Logout Endpoint
+```
+#GET endpoint
+http://localhost:3000/logout
+```
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - Naveen Bommidi
+- Website - [Blog](https://learmoreseekmore.com/)
+- Youtube  - [Naveen Bommidi Tech Seeker](https://www.youtube.com/c/NaveenTechSeeker)
 
-## License
-
-Nest is [MIT licensed](LICENSE).
